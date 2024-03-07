@@ -5,66 +5,64 @@ using UnityEngine.InputSystem;
 
 public class CharMovement : MonoBehaviour
 {
-    private PlayerInput playerInput;
-    private Animator playerAnimation;
-    private CharacterController playerCharController;
 
-    public float speed = 5f;
-    public float gravity = -9.18f;
-    public float jumpHeight = 3f;
+    [Header("Components of the character")]
+    [SerializeField] private Rigidbody rigB;
+    [SerializeField] private Transform camera;
+    [SerializeField] private PlayerInput playerInput;
 
-    public Transform groundCheck;
-    public float groundDistance = 0.4f;
-    public LayerMask groundMask;
+    [Header("Movement values")]
+    [SerializeField] private float speed;
+    [SerializeField] private float turnSmoothTime;
+    private Vector3 dir;
 
-    private Vector3 velocity;
-    private bool isGrounded;
+    [Header("Animator")]
+    [SerializeField] Animator anim;
+    int isWalkingHash;
+    int isRunningHash;
 
-    //// Add boolean parameters for animation control
-    //private bool isDead;
-    //private bool isRunning;
-    //private bool isJumping;
-    //private bool isWalking;
+    private float _turnSmoothVelocity;
 
-    void Awake()
+    private void Start()
     {
-       playerInput = GetComponent<PlayerInput>();
-        playerAnimation = GetComponent<Animator>();
-        playerCharController = GetComponent<CharacterController>();
+        isWalkingHash = Animator.StringToHash("isWalking");
+        isRunningHash = Animator.StringToHash("isRunning");
+    }
 
-        if (playerAnimation == null)
+    private void Update()
+    {
+        Vector2 movementInput = playerInput.actions["Move"].ReadValue<Vector2>();
+        float horizontal = movementInput.x;
+        float vertical = movementInput.y;
+        dir = new Vector3(horizontal, 0f, vertical).normalized;
+
+
+        if (dir.magnitude != 0f)
         {
-            Debug.LogError("No hay nada que animar en el objeto del juego, metele algo koooooooonyo.");
+            anim.SetBool("isRunning", true);
+
+
+            CharacterMove();
         }
+        else anim.SetBool("isRunning", false);
     }
 
-    void Start()
+    private void CharacterMove()
     {
-       playerInput.actions["Dance"].performed += ctx => Dance();
+        //mantiene al jugador orientado en la direccion del movimiento
+        float targetAngle = Mathf.Atan2(dir.x, dir.z) * Mathf.Rad2Deg + camera.eulerAngles.y;
+        float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref _turnSmoothVelocity, turnSmoothTime);
+        transform.rotation = Quaternion.Euler(0f, angle, 0f);
+
+
+        //Usamos el char.controller para movernos con la direccion que sacamos del imput system
+        Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
+        rigB.AddForce(moveDir.normalized * speed * Time.deltaTime, ForceMode.Force);
     }
 
-    void Update()
+    void HandleMovement()
     {
-        Vector2 movementInput =playerInput.actions["Move"].ReadValue<Vector2>();
-        float x = movementInput.x;
-        float z = movementInput.y;
-
-        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
-
-        Vector3 move = transform.right * x + transform.forward * z;
-        playerCharController.Move(move * speed * Time.deltaTime);
-
-        velocity.y += gravity * Time.deltaTime;
-        playerCharController.Move(velocity * Time.deltaTime);
-
-        
-    }
-
-    void Dance()
-    {
-        if (playerAnimation != null)
-        {
-            playerAnimation.SetTrigger("dance");
-        }
+        bool isWalking = anim.GetBool("isWalkingHash");
+        bool isRunning = anim.GetBool("isRunningHash");
     }
 }

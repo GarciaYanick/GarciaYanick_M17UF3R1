@@ -295,7 +295,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 293886376}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.000000029802319, y: 0.000000045398007, z: -0.00000001789548,
+  m_LocalRotation: {x: -0.000000029802319, y: -0.000000045398007, z: 0.00000001789548,
     w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -445,7 +445,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.18664327, y: 0.000000035146016, z: -0.000000006677099, w: 0.9824278}
+  m_LocalRotation: {x: 0.18664327, y: -0.000000035146016, z: 0.000000006677099, w: 0.9824278}
   m_LocalPosition: {x: 0, y: 1.51, z: -4.82}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -580,7 +580,7 @@ MonoBehaviour:
     m_DecelTime: 0.1
     m_InputAxisName: Mouse Y
     m_InputAxisValue: 0
-    m_InvertInput: 0
+    m_InvertInput: 1
     m_MinValue: 0
     m_MaxValue: 1
     m_Wrap: 0
@@ -604,7 +604,7 @@ MonoBehaviour:
     m_DecelTime: 0.1
     m_InputAxisName: Mouse X
     m_InputAxisValue: 0
-    m_InvertInput: 1
+    m_InvertInput: 0
     m_MinValue: -180
     m_MaxValue: 180
     m_Wrap: 1
@@ -827,7 +827,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 487145042}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.021725252, y: 0.000000039739046, z: -0.000000014675515,
+  m_LocalRotation: {x: -0.021725252, y: -0.000000039739046, z: 0.000000014675515,
     w: 0.99976397}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -1912,15 +1912,15 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6474dafea67bc87428bbf2a024cff3e9,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1899783731}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6474dafea67bc87428bbf2a024cff3e9,
-        type: 3}
-      insertIndex: -1
       addedObject: {fileID: 1899783730}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6474dafea67bc87428bbf2a024cff3e9,
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1899783732}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6474dafea67bc87428bbf2a024cff3e9,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1899783734}
   m_SourcePrefab: {fileID: 100100000, guid: 6474dafea67bc87428bbf2a024cff3e9, type: 3}
 --- !u!1 &1545825128 stripped
 GameObject:
@@ -2219,7 +2219,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1777886733}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.04335855, y: -0.000000041952795, z: 0.000000014469154, w: 0.99905956}
+  m_LocalRotation: {x: -0.04335855, y: 0.000000025686669, z: -0.000000008859108, w: 0.99905956}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2264,19 +2264,6 @@ MonoBehaviour:
   m_DefaultActionMap: Movement
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &1899783731
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1545825128}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5196ee881962df04b959ade90c902640, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 5
 --- !u!54 &1899783732
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2304,6 +2291,24 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1899783734
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1545825128}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1908165d69607c4dadc4766bb9f72b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rigB: {fileID: 1899783732}
+  camera: {fileID: 330585546}
+  playerInput: {fileID: 1899783730}
+  speed: 0
+  turnSmoothTime: 0
+  anim: {fileID: 0}
 --- !u!1001 &2024288510
 PrefabInstance:
   m_ObjectHideFlags: 0

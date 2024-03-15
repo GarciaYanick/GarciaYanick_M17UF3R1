@@ -4,9 +4,9 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - key
   - Katana
-  - buddy
+  - Key
+  - Ghost
   layers:
   - Default
   - TransparentFX

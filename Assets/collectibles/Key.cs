@@ -4,20 +4,10 @@ using UnityEngine;
 
 public class Key : MonoBehaviour, ICollectibles
 {
+    [SerializeField] GameObject charKey;
 
-    public GameObject charKey;
-
-    public void Start()
+    public void OnTriggerEnter(Collider col)
     {
-        charKey = GameObject.Find("Key");
-    }
-
-    public void OnTriggerEnter(Collider other)
-    {
-        GameObject Collectible = GetComponent<GameObject>();
-        if (Collectible.CompareTag("Key"))
-        {
-
-        }
+        charKey.SetActive(true);
     }
 }

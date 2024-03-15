@@ -5,14 +5,9 @@ using UnityEngine;
 public class Ghost : MonoBehaviour, ICollectibles
 {
     [SerializeField] GameObject charGhost;
-    GameObject ghostCollectible;
+    [SerializeField]GameObject ghostCollectible;
 
-    private void Start()
-    {
-        ghostCollectible = GetComponent<GameObject>();
-    }
-
-    public void OnTriggerEnter(Collider other)
+    public void OnTriggerEnter(Collider col)
     {
         charGhost.SetActive(true);
         ghostCollectible.SetActive(false);

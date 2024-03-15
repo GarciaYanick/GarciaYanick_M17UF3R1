@@ -4,19 +4,10 @@ using UnityEngine;
 
 public class Katana : MonoBehaviour, ICollectibles
 {
-    public GameObject charKatana;
+    [SerializeField] GameObject charKatana;
 
-    public void Start()
+    public void OnTriggerEnter(Collider col)
     {
-        charKatana = GameObject.Find("Katana");
-    }
-
-    public void OnTriggerEnter(Collider other)
-    {
-        GameObject Collectible = GetComponent<GameObject>();
-        if (Collectible.CompareTag("Katana"))
-        {
-
-        }
+        charKatana.SetActive(true);
     }
 }

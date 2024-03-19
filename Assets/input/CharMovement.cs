@@ -40,10 +40,10 @@ public class CharMovement : MonoBehaviour
 
         if (dir.magnitude != 0f)
         {
-            anim.SetBool("isRunning", true);
+            anim.SetBool("isWalking", true);
             CharacterMove();
         }
-        else anim.SetBool("isRunning", false);
+        else anim.SetBool("isWalking", false);
     }
 
     private void CharacterMove()

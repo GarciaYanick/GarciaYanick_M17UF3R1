@@ -6,8 +6,10 @@ public class Katana : MonoBehaviour, ICollectibles
 {
     [SerializeField] GameObject charKatana;
 
+
     public void OnTriggerEnter(Collider col)
     {
         charKatana.SetActive(true);
+        gameObject.SetActive(false);
     }
 }

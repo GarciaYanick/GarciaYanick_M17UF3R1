@@ -9,5 +9,6 @@ public class Key : MonoBehaviour, ICollectibles
     public void OnTriggerEnter(Collider col)
     {
         charKey.SetActive(true);
+        gameObject.SetActive(false);
     }
 }

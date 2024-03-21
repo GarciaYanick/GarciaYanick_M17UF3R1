@@ -5,11 +5,10 @@ using UnityEngine;
 public class Ghost : MonoBehaviour, ICollectibles
 {
     [SerializeField] GameObject charGhost;
-    [SerializeField]GameObject ghostCollectible;
 
     public void OnTriggerEnter(Collider col)
     {
         charGhost.SetActive(true);
-        ghostCollectible.SetActive(false);
+        gameObject.SetActive(false);
     }
 }

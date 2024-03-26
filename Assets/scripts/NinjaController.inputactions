@@ -7,7 +7,7 @@
             "actions": [
                 {
                     "name": "Move",
-                    "type": "Value",
+                    "type": "PassThrough",
                     "id": "75bf7f66-2079-4aa7-b6ab-61bc219cd4d1",
                     "expectedControlType": "Vector2",
                     "processors": "",
@@ -70,6 +70,34 @@
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
+                }
+            ]
+        },
+        {
+            "name": "PlayerActions",
+            "id": "a7b633a0-1e2a-4959-bc1a-9455dd069af1",
+            "actions": [
+                {
+                    "name": "Actions",
+                    "type": "Button",
+                    "id": "b9082ac3-8af8-4f46-b2e4-a8c2d35a94b0",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "cc5b64fc-f0b9-450b-8e67-4bea624cd068",
+                    "path": "<Keyboard>/shift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Actions",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }

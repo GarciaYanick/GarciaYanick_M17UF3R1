@@ -7,22 +7,25 @@ using UnityEngine.EventSystems;
 public class PlayerLocomotion : MonoBehaviour
 {
     CharacterMovement inputManager;
+    PlayerManager playerManager;
 
     Vector3 moveDirection;
     Transform cameraObject;
     Rigidbody playerRB;
 
     public bool isSprinting;
+    public bool isGrounded;
 
     [Header("Speeds")]
     public float walkingSpeed = 1.5f;
-    public float moveSpeed = 5;
-    public float runningSpeed = 7;
+    public float moveSpeed = 7;
+    public float runningSpeed = 10;
     public float rotationSpeed = 15;
 
     public void Awake()
     {
         inputManager = GetComponent<CharacterMovement>();
+        playerManager = GetComponent<PlayerManager>();
         playerRB = GetComponent<Rigidbody>();
         cameraObject = Camera.main.transform;
     }
@@ -54,7 +57,6 @@ public class PlayerLocomotion : MonoBehaviour
             {
                 moveDirection = moveDirection * walkingSpeed;
             }
-            moveDirection = moveDirection * moveSpeed;
         }
         
         Vector3 movementVel = moveDirection;

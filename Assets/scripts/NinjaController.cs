@@ -107,6 +107,24 @@ public partial class @NinjaController: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Jumping"",
+                    ""type"": ""Button"",
+                    ""id"": ""c8454a40-60e2-46ae-b271-004332564062"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Dance"",
+                    ""type"": ""Button"",
+                    ""id"": ""7e78dbbc-23f7-4285-ba66-99b844386da0"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -118,6 +136,28 @@ public partial class @NinjaController: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Actions"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""15281e59-614b-407c-928f-25eeeccadde4"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Jumping"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6cacb435-acf0-4812-b5ad-e446e907734d"",
+                    ""path"": ""<Keyboard>/c"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Dance"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -132,6 +172,8 @@ public partial class @NinjaController: IInputActionCollection2, IDisposable
         // PlayerActions
         m_PlayerActions = asset.FindActionMap("PlayerActions", throwIfNotFound: true);
         m_PlayerActions_Actions = m_PlayerActions.FindAction("Actions", throwIfNotFound: true);
+        m_PlayerActions_Jumping = m_PlayerActions.FindAction("Jumping", throwIfNotFound: true);
+        m_PlayerActions_Dance = m_PlayerActions.FindAction("Dance", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -240,11 +282,15 @@ public partial class @NinjaController: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_PlayerActions;
     private List<IPlayerActionsActions> m_PlayerActionsActionsCallbackInterfaces = new List<IPlayerActionsActions>();
     private readonly InputAction m_PlayerActions_Actions;
+    private readonly InputAction m_PlayerActions_Jumping;
+    private readonly InputAction m_PlayerActions_Dance;
     public struct PlayerActionsActions
     {
         private @NinjaController m_Wrapper;
         public PlayerActionsActions(@NinjaController wrapper) { m_Wrapper = wrapper; }
         public InputAction @Actions => m_Wrapper.m_PlayerActions_Actions;
+        public InputAction @Jumping => m_Wrapper.m_PlayerActions_Jumping;
+        public InputAction @Dance => m_Wrapper.m_PlayerActions_Dance;
         public InputActionMap Get() { return m_Wrapper.m_PlayerActions; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -257,6 +303,12 @@ public partial class @NinjaController: IInputActionCollection2, IDisposable
             @Actions.started += instance.OnActions;
             @Actions.performed += instance.OnActions;
             @Actions.canceled += instance.OnActions;
+            @Jumping.started += instance.OnJumping;
+            @Jumping.performed += instance.OnJumping;
+            @Jumping.canceled += instance.OnJumping;
+            @Dance.started += instance.OnDance;
+            @Dance.performed += instance.OnDance;
+            @Dance.canceled += instance.OnDance;
         }
 
         private void UnregisterCallbacks(IPlayerActionsActions instance)
@@ -264,6 +316,12 @@ public partial class @NinjaController: IInputActionCollection2, IDisposable
             @Actions.started -= instance.OnActions;
             @Actions.performed -= instance.OnActions;
             @Actions.canceled -= instance.OnActions;
+            @Jumping.started -= instance.OnJumping;
+            @Jumping.performed -= instance.OnJumping;
+            @Jumping.canceled -= instance.OnJumping;
+            @Dance.started -= instance.OnDance;
+            @Dance.performed -= instance.OnDance;
+            @Dance.canceled -= instance.OnDance;
         }
 
         public void RemoveCallbacks(IPlayerActionsActions instance)
@@ -288,5 +346,7 @@ public partial class @NinjaController: IInputActionCollection2, IDisposable
     public interface IPlayerActionsActions
     {
         void OnActions(InputAction.CallbackContext context);
+        void OnJumping(InputAction.CallbackContext context);
+        void OnDance(InputAction.CallbackContext context);
     }
 }

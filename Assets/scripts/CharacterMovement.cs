@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,6 +17,8 @@ public class CharacterMovement : MonoBehaviour
     public float horizontal;
 
     public bool shift_input;
+    public bool jump_input;
+    public bool dance_input;
 
     private void Awake()
     {
@@ -31,8 +34,14 @@ public class CharacterMovement : MonoBehaviour
             input = new NinjaController();
 
             input.MoveControl.Move.performed += ctx => moveInput = ctx.ReadValue<Vector2>();
+
+            //Sprinting
             input.PlayerActions.Actions.performed += ctx => shift_input = true;
             input.PlayerActions.Actions.canceled += ctx => shift_input = false;
+            //Jumping
+            input.PlayerActions.Jumping.performed += ctx => jump_input = true;
+            //Dancing
+            input.PlayerActions.Dance.performed += ctx => dance_input = true;
         }
 
         input.Enable();
@@ -48,8 +57,8 @@ public class CharacterMovement : MonoBehaviour
     {
         HandleMovementInput();
         HandleSprintingInput();
-        //HandleJumpingInput();
-        //HandleDanceInput();
+        HandleJumpingInput();
+        HandleDanceInput();
     }
 
     private void HandleMovementInput()
@@ -69,6 +78,24 @@ public class CharacterMovement : MonoBehaviour
         else
         {
             playerLocomotion.isSprinting = false;
+        }
+    }
+
+    private void HandleJumpingInput()
+    {
+        if (jump_input == true)
+        {
+            jump_input = false;
+            playerLocomotion.HandleJumping();
+        }
+    }
+
+    private void HandleDanceInput()
+    {
+        if (dance_input == true)
+        {
+            dance_input = false;
+            playerLocomotion.HandleDancing();
         }
     }
 }
